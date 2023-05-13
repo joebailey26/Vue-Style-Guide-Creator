@@ -144,8 +144,8 @@ div[id^='font-picker'], .vc-chrome {
     </div>
     <h2>Download / Buttons</h2>
     <div class="btns container column">
-      <button class="btn primary-btn" @click="$modal.show('nuxt')">Download for Vue/Nuxt</button>
-      <button class="btn secondary-btn" @click="$modal.show('wp')">Download for WordPress</button>
+      <button class="btn primary-btn" @click="$modal.show('nuxt')">Get code for Vue/Nuxt</button>
+      <button class="btn secondary-btn" @click="$modal.show('wp')">Get code for WordPress</button>
     </div>
     <modal name="nuxt" height="80%" width="80%" :adaptive="true" :click-to-close="true">
       <div class="modal">
