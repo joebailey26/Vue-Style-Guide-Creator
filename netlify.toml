@@ -1,3 +1,10 @@
+[build]
+  command = "yarn build --no-optional"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "16"
+
 [[redirects]]
   from = "https://vue-style-guide-creator.netlify.app/*"
   to = "https://style-guide-creator.joebailey.xyz/:splat"
