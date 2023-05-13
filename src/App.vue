@@ -239,8 +239,8 @@ body {
   '@fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}/400.css',
   '@fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}/700.css',
   ${this.fontBody.family !== this.fontHeading.family ? 
-  `@fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}/400.css,
-  @fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}/700.css` : ''}
+  `'@fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}/400.css',
+  '@fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}/700.css'` : ''}
 ]`
       }
     },
