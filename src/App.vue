@@ -150,39 +150,43 @@ div[id^='font-picker'], .vc-chrome {
     <modal name="nuxt" height="80%" width="80%" :adaptive="true" :click-to-close="true">
       <div class="modal">
         <h2>
+          Yarn
+        </h2>
+        <pre>{{this.nuxt.terminal}}</pre>
+        <h2>
           CSS
         </h2>
-        <pre>
-          {{this.nuxt.css}}
-        </pre>
+        <pre>{{this.nuxt.css}}</pre>
         <h2>nuxt.config.js</h2>
-        <pre>
-          {{this.nuxt.js}}
-        </pre>
+        <pre>{{this.nuxt.js}}</pre>
       </div>
     </modal>
     <modal name="wp" height="80%" width="80%" :adaptive="true" :click-to-close="true">
       <div class="modal">
         <h2>
+          Yarn
+        </h2>
+        <pre>{{this.wp.terminal}}</pre>
+        <h2>
           CSS
         </h2>
-        <pre>
-          {{this.wp.css}}
-        </pre>
+        <pre>{{this.wp.css}}</pre>
         <h2>header.php</h2>
-        <pre>
-          {{this.wp.php}}
-        </pre>
+        <pre>{{this.wp.php}}</pre>
       </div>
     </modal>
   </div>
 </template>
 
 <script>
-import Color from "./components/color"
+import Color from './components/color'
+import FontPicker from 'font-picker-vue'
 
 export default {
-  name: "App",
+  components: {
+    Color,
+    FontPicker
+  },
   data () {
     return {
       apiKey: 'AIzaSyCYTib-0NYDlyJQbJACMdIGoP2qgw3zXNc',
@@ -209,19 +213,17 @@ export default {
   },
   computed: {
     variables () {
-      return `
---primaryColor: ${this.primaryColor};
---secondaryColor: ${this.secondaryColor};
---tertiaryColor: ${this.tertiaryColor};
---primaryFont: ${this.fontHeading.family}, ${this.fontHeading.category};
---secondaryFont: ${this.fontBody.family}, ${this.fontBody.category};
---borderRadius:${this.borderRadius}px;
---fontSize: ${this.fontSize}px`
+      return `--primaryColor: ${this.primaryColor};
+  --secondaryColor: ${this.secondaryColor};
+  --tertiaryColor: ${this.tertiaryColor};
+  --primaryFont: ${this.fontHeading.family}, ${this.fontHeading.category};
+  --secondaryFont: ${this.fontBody.family}, ${this.fontBody.category};
+  --borderRadius:${this.borderRadius}px;
+  --fontSize: ${this.fontSize}px`
     },
     nuxt () {
       return {
-        css: `
-:root {
+        css: `:root {
   ${this.variables}
 }
 h1, h2, h3, h4, h5, h6 {
@@ -232,24 +234,19 @@ body {
   font-family: var(--secondaryFont);
   color: var(--secondaryColor)
 }`,
-        js: `
-export default {
-  link: [
-    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true },
-    { rel: 'preload', as: 'style', href: 'https://fonts.googleapis.com/css2?family=${this.fontHeading.family}&family=${this.fontBody.family}&display=swap' },
-    { rel: 'stylesheet', media: 'print', onload: 'this.media="all"', href: 'https://fonts.googleapis.com/css2?family=${this.fontHeading.family}&family=${this.fontBody.family}&display=swap' }
-  ],
-  __dangerouslyDisableSanitizers: ['script', 'noscript'],
-  noscript: [
-    { innerHTML: '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=${this.fontHeading.family}&family=${this.fontBody.family}&display=swap" />' }
-  ]
-}`
+        terminal: `yarn add @fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')} ${this.fontBody.family !== this.fontHeading.family ? '@fontsource/' + this.fontBody.family.toLowerCase().replaceAll(' ', '-') : ''}`,
+        js: `css: [
+  '@fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}/400.css',
+  '@fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}/700.css',
+  ${this.fontBody.family !== this.fontHeading.family ? 
+  `@fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}/400.css,
+  @fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}/700.css` : ''}
+]`
       }
     },
     wp () {
       return {
-        css: `
-:root {
+        css: `:root {
   ${this.variables}
 }
 h1, h2, h3, h4, h5, h6 {
@@ -260,16 +257,17 @@ body {
   font-family: var(--secondaryFont);
   color: var(--secondaryColor)
 }`,
-        php: `
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true">
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=${this.fontHeading.family}&family=${this.fontBody.family}&display=swap">
-<link rel="stylesheet" media="all" onload="this.media=&quot;all&quot;" href="https://fonts.googleapis.com/css2?family=${this.fontHeading.family}&family=${this.fontBody.family}&display=swap">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=${this.fontHeading.family}&family=${this.fontBody.family}&display=swap"></noscript>`
+        terminal: `yarn add @fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')} ${this.fontBody.family !== this.fontHeading.family ? '@fontsource/' + this.fontBody.family.toLowerCase().replaceAll(' ', '-') : ''}`,
+        php: `function galexia_enqueue_fonts() {
+	wp_enqueue_style( '${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}-regular', get_template_directory_uri() . '/node_modules/@fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}/400.css' );
+	wp_enqueue_style( '${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}-bold', get_template_directory_uri() . '/node_modules/@fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}/700.css' );
+  ${this.fontBody.family !== this.fontHeading.family ? 
+  `wp_enqueue_style( '${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}-regular', get_template_directory_uri() . '/node_modules/@fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}/400.css' );
+	wp_enqueue_style( '${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}-bold', get_template_directory_uri() . '/node_modules/@fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}/700.css' );` : ''}
+}
+add_action( 'wp_enqueue_scripts', 'galexia_enqueue_fonts' );`
       }
     }
-  },
-  components: {
-    Color
   },
   methods: {
     headingFont (font) {
