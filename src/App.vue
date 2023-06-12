@@ -3,21 +3,21 @@
   box-sizing: border-box
 }
 body {
+  display: grid;
+  min-height: 100vh;
   margin: 0;
   background: white;
-  display: grid;
   place-content: center;
-  place-items: center;
-  min-height: 100vh
+  place-items: center
 }
 #app {
-  color: var(--secondaryColor);
   max-width: 1200px;
-  padding: 0 2rem;
   margin: 40px auto 60px;
+  padding: 0 2rem;
+  color: var(--secondaryColor);
+  font-size: var(--fontSize);
   font-family: var(--secondaryFont);
-  text-align: left;
-  font-size: var(--fontSize)
+  text-align: left
 }
 h1, h2, h3, h4, h5, h6 {
   color: var(--primaryColor);
@@ -35,92 +35,94 @@ h1, h2 {
   margin-bottom: 0
 }
 .container.column {
-  grid-auto-flow: column;
-  grid-auto-columns: max-content
+  grid-auto-columns: max-content;
+  grid-auto-flow: column
 }
 label {
   width: min-content
 }
 input {
-  font-size: 1.2rem;
   padding: 6px;
+  font-size: 1.2rem;
   border: 1px solid var(--primaryColor);
   border-radius: var(--borderRadius)
 }
 .btn {
+  min-width: 26ch;
   padding: 1rem;
   border-radius: var(--borderRadius);
-  transition: .5s;
   cursor: pointer;
-  min-width: 26ch
+  transition: .5s
 }
 .primary-btn {
-  border: 1px solid var(--secondaryColor);
+  color: var(--tertiaryColor);
   background-color: var(--primaryColor);
-  color: var(--tertiaryColor)
+  border: 1px solid var(--secondaryColor)
 }
 .primary-btn:hover {
   background-color: var(--secondaryColor)
 }
 .secondary-btn {
-  border: 1px solid var(--primaryColor);
+  color: var(--primaryColor);
   background-color: var(--tertiaryColor);
-  color: var(--primaryColor)
+  border: 1px solid var(--primaryColor)
 }
 .secondary-btn:hover {
-  background-color: var(--primaryColor);
-  color: var(--tertiaryColor)
+  color: var(--tertiaryColor);
+  background-color: var(--primaryColor)
 }
 .fonts {
   align-items: start
 }
 .vm--modal {
-  overflow-y: auto!important;
+  height: 100%;
   padding: 2rem;
-  height: 100%
+  /* stylelint-disable-next-line declaration-no-important */
+  overflow-y: auto!important
 }
 .vm--modal h2 {
   margin-bottom: .83em
 }
 pre {
-  background-color: #EFEFEF;
-  width: 100%;
   display: block;
+  width: 100%;
   padding: 1rem;
-  user-select: all;
-  border-radius: 8px;
   white-space: pre-wrap;
-  word-wrap: break-word
+  word-wrap: break-word;
+  background-color: #EFEFEF;
+  border-radius: 8px;
+  user-select: all
 }
 div[id^='font-picker'], .vc-chrome {
-  box-shadow: none!important;
-  border: 1px solid #AFAFAF
+  border: 1px solid #AFAFAF;
+  /* stylelint-disable-next-line declaration-no-important */
+  box-shadow: none!important
 }
 </style>
 
 <template>
   <div id="app" class="container" :style="variables">
     <div>
-    <h1>
-      Style Guide Creator
-    </h1>
-    <h2>Colors</h2>
+      <h1>
+        Style Guide Creator
+      </h1>
+      <h2>Colors</h2>
     </div>
     <div class="colors container column">
-      <color :primary="true" color="#1a237e"/>
-      <color :secondary="true" color="#212121"/>
-      <color :tertiary="true" color="#ffffff"/>
+      <color :primary="true" color="#1a237e" />
+      <color :secondary="true" color="#212121" />
+      <color :tertiary="true" color="#ffffff" />
     </div>
     <h2>Typography</h2>
     <div class="fonts">
       <div class="container column">
         <label>
           Heading Font
-          <font-picker :api-key="apiKey" :options="options1" :active-font="fontHeading.family" @change="headingFont"></font-picker>
+          <font-picker :api-key="apiKey" :options="options1" :active-font="fontHeading.family" @change="headingFont" />
         </label>
         <label>
           Body Font
-          <font-picker :api-key="apiKey" :options="options2" :active-font="fontBody.family" @change="bodyFont"></font-picker>
+          <font-picker :api-key="apiKey" :options="options2" :active-font="fontBody.family" @change="bodyFont" />
         </label>
         <label>
           Font Size
@@ -144,21 +146,25 @@ div[id^='font-picker'], .vc-chrome {
     </div>
     <h2>Download / Buttons</h2>
     <div class="btns container column">
-      <button class="btn primary-btn" @click="$modal.show('nuxt')">Get code for Vue/Nuxt</button>
-      <button class="btn secondary-btn" @click="$modal.show('wp')">Get code for WordPress</button>
+      <button class="btn primary-btn" @click="$modal.show('nuxt')">
+        Get code for Vue/Nuxt
+      </button>
+      <button class="btn secondary-btn" @click="$modal.show('wp')">
+        Get code for WordPress
+      </button>
     </div>
     <modal name="nuxt" height="80%" width="80%" :adaptive="true" :click-to-close="true">
       <div class="modal">
         <h2>
           Yarn
         </h2>
-        <pre>{{this.nuxt.terminal}}</pre>
+        <pre>{{ nuxt.terminal }}</pre>
         <h2>
           CSS
         </h2>
-        <pre>{{this.nuxt.css}}</pre>
+        <pre>{{ nuxt.css }}</pre>
         <h2>nuxt.config.js</h2>
-        <pre>{{this.nuxt.js}}</pre>
+        <pre>{{ nuxt.js }}</pre>
       </div>
     </modal>
     <modal name="wp" height="80%" width="80%" :adaptive="true" :click-to-close="true">
@@ -166,21 +172,21 @@ div[id^='font-picker'], .vc-chrome {
         <h2>
           Yarn
         </h2>
-        <pre>{{this.wp.terminal}}</pre>
+        <pre>{{ wp.terminal }}</pre>
         <h2>
           CSS
         </h2>
-        <pre>{{this.wp.css}}</pre>
+        <pre>{{ wp.css }}</pre>
         <h2>header.php</h2>
-        <pre>{{this.wp.php}}</pre>
+        <pre>{{ wp.php }}</pre>
       </div>
     </modal>
   </div>
 </template>
 
 <script>
-import Color from './components/color'
 import FontPicker from 'font-picker-vue'
+import Color from './components/color'
 
 export default {
   components: {
@@ -238,9 +244,10 @@ body {
         js: `css: [
   '@fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}/400.css',
   '@fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}/700.css',
-  ${this.fontBody.family !== this.fontHeading.family ? 
-  `'@fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}/400.css',
-  '@fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}/700.css'` : ''}
+  ${this.fontBody.family !== this.fontHeading.family
+  ? `'@fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}/400.css',
+  '@fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}/700.css'`
+: ''}
 ]`
       }
     },
@@ -259,11 +266,12 @@ body {
 }`,
         terminal: `yarn add @fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')} ${this.fontBody.family !== this.fontHeading.family ? '@fontsource/' + this.fontBody.family.toLowerCase().replaceAll(' ', '-') : ''}`,
         php: `function galexia_enqueue_fonts() {
-	wp_enqueue_style( '${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}-regular', get_template_directory_uri() . '/node_modules/@fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}/400.css' );
-	wp_enqueue_style( '${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}-bold', get_template_directory_uri() . '/node_modules/@fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}/700.css' );
-  ${this.fontBody.family !== this.fontHeading.family ? 
-  `wp_enqueue_style( '${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}-regular', get_template_directory_uri() . '/node_modules/@fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}/400.css' );
-	wp_enqueue_style( '${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}-bold', get_template_directory_uri() . '/node_modules/@fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}/700.css' );` : ''}
+  wp_enqueue_style( '${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}-regular', get_template_directory_uri() . '/node_modules/@fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}/400.css' );
+  wp_enqueue_style( '${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}-bold', get_template_directory_uri() . '/node_modules/@fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}/700.css' );
+  ${this.fontBody.family !== this.fontHeading.family
+  ? `wp_enqueue_style( '${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}-regular', get_template_directory_uri() . '/node_modules/@fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}/400.css' );
+  wp_enqueue_style( '${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}-bold', get_template_directory_uri() . '/node_modules/@fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}/700.css' );`
+: ''}
 }
 add_action( 'wp_enqueue_scripts', 'galexia_enqueue_fonts' );`
       }
@@ -271,11 +279,10 @@ add_action( 'wp_enqueue_scripts', 'galexia_enqueue_fonts' );`
   },
   methods: {
     headingFont (font) {
-      console.log(font)
-			this.fontHeading = font
+      this.fontHeading = font
     },
     bodyFont (font) {
-			this.fontBody = font
+      this.fontBody = font
     }
   }
 }

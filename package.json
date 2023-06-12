@@ -5,24 +5,34 @@
   "scripts": {
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint:scripts": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "fix:scripts": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
+    "lint:styles": "stylelint \"**/*.{vue,scss}\"",
+    "fix:styles": "stylelint \"**/*.{vue,scss}\" --fix"
   },
   "dependencies": {
-    "@vue/cli-plugin-babel": "4.1.1",
     "font-picker-vue": "^1.0.3",
-    "vue": "^2.6.11",
-    "vue-color": "2.8.1",
-    "vue-js-modal": "^2.0.0-rc.6"
+    "vue": "^2.7.14",
+    "vue-color": "^2.8.1",
+    "vue-js-modal": "^2.0.1",
+    "vue-template-compiler": "^2.7.14"
   },
   "devDependencies": {
-    "@vue/cli-plugin-eslint": "4.1.1",
-    "@vue/cli-service": "4.1.1",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
-    "eslint-plugin-vue": "^6.0.1",
-    "stylelint": "^13.11.0",
+    "@nuxtjs/eslint-config": "^6.0.1",
+    "@vue/cli-service": "^4.5.19",
+    "eslint": "^7.29.0",
+    "eslint-plugin-nuxt": "^4.0.0",
+    "postcss": "^8.4.19",
+    "postcss-html": "^1.5.0",
+    "stylelint": "^15.3.0",
     "stylelint-config-standard": "^20.0.0",
-    "vue-template-compiler": "^2.6.11"
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-recommended-vue": "^1.4.0",
+    "stylelint-config-standard-scss": "^7.0.1",
+    "stylelint-processor-html": "^1.0.0"
+  },
+  "optionalDependencies": {
+    "typescript": "^4.9.5"
   },
   "postcss": {
     "plugins": {

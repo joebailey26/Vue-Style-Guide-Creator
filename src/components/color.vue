@@ -1,13 +1,14 @@
 <template>
-  <chrome-picker @input="updateColor" v-model="actual" />
+  <chrome-picker v-model="actual" @input="updateColor" />
 </template>
 
 <script>
-import { Chrome } from "vue-color";
+import { Chrome } from 'vue-color'
 
 export default {
+  name: 'Color',
   components: {
-    "chrome-picker": Chrome,
+    'chrome-picker': Chrome
   },
   props: {
     primary: Boolean,
@@ -18,7 +19,6 @@ export default {
       default: '#000000'
     }
   },
-  name: "color",
   data () {
     return {
       actual: null
