@@ -1,9 +1,11 @@
 [build]
-  command = "yarn build --no-optional"
+  command = "yarn generate"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "18"
+  YARN_FLAGS = "--ignore-optional"
+  CI = "1"
 
 [[redirects]]
   from = "https://vue-style-guide-creator.netlify.app/*"
