@@ -222,14 +222,24 @@ export default {
       return `--primaryColor: ${this.primaryColor};
   --secondaryColor: ${this.secondaryColor};
   --tertiaryColor: ${this.tertiaryColor};
-  --primaryFont: ${this.fontHeading.family}, ${this.fontHeading.category};
-  --secondaryFont: ${this.fontBody.family}, ${this.fontBody.category};
+  --primaryFont: ${this.fontHeading.family}, ${this.fontHeading.family} fallback, ${this.fontHeading.category};
+  --secondaryFont: ${this.fontBody.family}, ${this.fontBody.family} fallback, ${this.fontBody.category};
   --borderRadius:${this.borderRadius}px;
   --fontSize: ${this.fontSize}px`
     },
     nuxt () {
       return {
-        css: `:root {
+        css: `@font-face {
+  font-family: ${this.fontHeading.family} fallback;
+  size-adjust: 100%; // Adjust as needed
+  src: local('Arial') // Change as needed
+}
+@font-face {
+  font-family: ${this.fontBody.family} fallback;
+  size-adjust: 100%; // Adjust as needed
+  src: local('Arial') // Change as needed
+}
+:root {
   ${this.variables}
 }
 h1, h2, h3, h4, h5, h6 {
@@ -253,7 +263,17 @@ body {
     },
     wp () {
       return {
-        css: `:root {
+        css: `@font-face {
+  font-family: ${this.fontHeading.family} fallback;
+  size-adjust: 100%; // Adjust as needed
+  src: local('Arial') // Change as needed
+}
+@font-face {
+  font-family: ${this.fontBody.family} fallback;
+  size-adjust: 100%; // Adjust as needed
+  src: local('Arial') // Change as needed
+}
+:root {
   ${this.variables}
 }
 h1, h2, h3, h4, h5, h6 {
