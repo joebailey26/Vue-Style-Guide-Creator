@@ -5,6 +5,7 @@
 [build.environment]
   NODE_VERSION = "18"
   CI = "1"
+  NODE_OPTIONS = "--openssl-legacy-provider"
 
 [[redirects]]
   from = "https://vue-style-guide-creator.netlify.app/*"
