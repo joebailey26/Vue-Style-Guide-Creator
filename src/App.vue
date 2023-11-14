@@ -224,7 +224,7 @@ export default {
   --tertiaryColor: ${this.tertiaryColor};
   --primaryFont: ${this.fontHeading.family}, ${this.fontHeading.family} fallback, ${this.fontHeading.category};
   --secondaryFont: ${this.fontBody.family}, ${this.fontBody.family} fallback, ${this.fontBody.category};
-  --borderRadius:${this.borderRadius}px;
+  --borderRadius: ${this.borderRadius}px;
   --fontSize: ${this.fontSize}px`
     },
     nuxt () {
