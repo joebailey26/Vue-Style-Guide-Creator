@@ -18,18 +18,11 @@
     "vue-template-compiler": "^2.7.15"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config": "^6.0.1",
     "@vue/cli-service": "^4.5.19",
     "eslint": "^7.29.0",
-    "eslint-plugin-nuxt": "^4.0.0",
-    "postcss": "^8.4.19",
-    "postcss-html": "^1.5.0",
-    "stylelint": "^15.3.0",
-    "stylelint-config-rational-order": "^0.1.2",
-    "stylelint-config-recommended-vue": "^1.4.0",
-    "stylelint-config-standard": "^20.0.0",
-    "stylelint-config-standard-scss": "^7.0.1",
-    "stylelint-processor-html": "^1.0.0"
+    "eslint-config-galexia": "https://github.com/Galexia-Agency/eslint-config",
+    "stylelint": "^15.11.0",
+    "stylelint-config-galexia": "https://github.com/Galexia-Agency/stylelint-config"
   },
   "optionalDependencies": {
     "typescript": "^4.9.5"
