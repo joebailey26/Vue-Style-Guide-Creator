@@ -1,14 +1,14 @@
 <template>
-  <chrome-picker v-model="actual" @input="updateColor" />
+  <ChromePicker v-model="actual" @input="updateColor" />
 </template>
 
 <script>
-import { Chrome } from 'vue-color'
+import { Chrome } from '@ckpack/vue-color'
 
 export default {
   name: 'Color',
   components: {
-    'chrome-picker': Chrome
+    ChromePicker: Chrome
   },
   props: {
     primary: Boolean,

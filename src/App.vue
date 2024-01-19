@@ -74,14 +74,17 @@ input {
 .fonts {
   align-items: start
 }
-.vm--modal {
-  height: 100%;
-  padding: 2rem;
-  /* stylelint-disable-next-line declaration-no-important */
-  overflow-y: auto!important
+.modal-container {
+  background-color: rgba(0,0,0,0.5)
 }
-.vm--modal h2 {
-  margin-bottom: .83em
+.modal-item {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  padding: 1rem 1.5rem;
+  max-height: 80%;
+  overflow: auto;
 }
 pre {
   display: block;
@@ -109,20 +112,20 @@ div[id^='font-picker'], .vc-chrome {
       <h2>Colors</h2>
     </div>
     <div class="colors container column">
-      <color :primary="true" color="#1a237e" />
-      <color :secondary="true" color="#212121" />
-      <color :tertiary="true" color="#ffffff" />
+      <Color :primary="true" color="#1a237e" />
+      <Color :secondary="true" color="#212121" />
+      <Color :tertiary="true" color="#ffffff" />
     </div>
     <h2>Typography</h2>
     <div class="fonts">
       <div class="container column">
         <label>
           Heading Font
-          <font-picker :api-key="apiKey" :options="options1" :active-font="fontHeading.family" @change="headingFont" />
+          <!-- <FontPicker :api-key="apiKey" :options="options1" :active-font="fontHeading.family" @change="headingFont" /> -->
         </label>
         <label>
           Body Font
-          <font-picker :api-key="apiKey" :options="options2" :active-font="fontBody.family" @change="bodyFont" />
+          <!-- <FontPicker :api-key="apiKey" :options="options2" :active-font="fontBody.family" @change="bodyFont" /> -->
         </label>
         <label>
           Font Size
@@ -146,52 +149,32 @@ div[id^='font-picker'], .vc-chrome {
     </div>
     <h2>Download / Buttons</h2>
     <div class="btns container column">
-      <button class="btn primary-btn" @click="$modal.show('nuxt')">
+      <button class="btn primary-btn" @click="openModal(NuxtModal, { nuxt })">
         Get code for Vue/Nuxt
       </button>
-      <button class="btn secondary-btn" @click="$modal.show('wp')">
+      <button class="btn secondary-btn" @click="openModal(WpModal, { wp })">
         Get code for WordPress
       </button>
     </div>
-    <modal name="nuxt" height="80%" width="80%" :adaptive="true" :click-to-close="true">
-      <div class="modal">
-        <h2>
-          Yarn
-        </h2>
-        <pre>{{ nuxt.terminal }}</pre>
-        <h2>
-          CSS
-        </h2>
-        <pre>{{ nuxt.css }}</pre>
-        <h2>nuxt.config.js</h2>
-        <pre>{{ nuxt.js }}</pre>
-      </div>
-    </modal>
-    <modal name="wp" height="80%" width="80%" :adaptive="true" :click-to-close="true">
-      <div class="modal">
-        <h2>
-          Yarn
-        </h2>
-        <pre>{{ wp.terminal }}</pre>
-        <h2>
-          CSS
-        </h2>
-        <pre>{{ wp.css }}</pre>
-        <h2>header.php</h2>
-        <pre>{{ wp.php }}</pre>
-      </div>
-    </modal>
+    <ModalContainer />
   </div>
 </template>
 
 <script>
-import FontPicker from 'font-picker-vue'
+// import FontPicker from 'font-picker-vue'
+import { container, openModal } from 'jenesius-vue-modal'
 import Color from './components/color'
+import NuxtModal from './components/nuxtModal'
+import WpModal from './components/wpModal'
 
 export default {
   components: {
     Color,
-    FontPicker
+    // FontPicker,
+    ModalContainer: container
+  },
+  setup () {
+    return { openModal, NuxtModal, WpModal }
   },
   data () {
     return {
@@ -250,7 +233,7 @@ body {
   font-family: var(--secondaryFont);
   color: var(--secondaryColor)
 }`,
-        terminal: `yarn add @fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')} ${this.fontBody.family !== this.fontHeading.family ? '@fontsource/' + this.fontBody.family.toLowerCase().replaceAll(' ', '-') : ''}`,
+        terminal: `yarn add @fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')} ${this.fontBody.family !== this.fontHeading.family ? `@fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}` : ''}`,
         js: `css: [
   '@fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}/400.css',
   '@fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}/700.css',
@@ -284,7 +267,7 @@ body {
   font-family: var(--secondaryFont);
   color: var(--secondaryColor)
 }`,
-        terminal: `yarn add @fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')} ${this.fontBody.family !== this.fontHeading.family ? '@fontsource/' + this.fontBody.family.toLowerCase().replaceAll(' ', '-') : ''}`,
+        terminal: `yarn add @fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')} ${this.fontBody.family !== this.fontHeading.family ? `@fontsource/${this.fontBody.family.toLowerCase().replaceAll(' ', '-')}` : ''}`,
         php: `function galexia_enqueue_fonts() {
   wp_enqueue_style( '${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}-regular', get_template_directory_uri() . '/node_modules/@fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}/400.css' );
   wp_enqueue_style( '${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}-bold', get_template_directory_uri() . '/node_modules/@fontsource/${this.fontHeading.family.toLowerCase().replaceAll(' ', '-')}/700.css' );

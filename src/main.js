@@ -1,11 +1,6 @@
-import Vue from 'vue'
-import VModal from 'vue-js-modal'
-import App from './App.vue'
+import { createApp } from 'vue'
+import App from './app.vue'
 
-Vue.use(VModal)
+const app = createApp(App)
 
-Vue.config.productionTip = false
-
-new Vue({
-  render: (h) => h(App)
-}).$mount('#app')
+app.mount('#app')
