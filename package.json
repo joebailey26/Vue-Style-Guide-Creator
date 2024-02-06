@@ -1,6 +1,6 @@
 {
   "name": "vue-style-guide-creator",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "vue-cli-service serve",
@@ -19,21 +19,11 @@
   "devDependencies": {
     "@vue/cli-service": "^5.0.8",
     "eslint": "^8.56.0",
-    "eslint-config-galexia": "https://github.com/Galexia-Agency/eslint-config.git#commit=a23a23534644dce9c1b2b97a41f1917e885aa532",
+    "eslint-config-galexia": "https://github.com/Galexia-Agency/eslint-config.git",
     "stylelint": "^15.11.0",
-    "stylelint-config-galexia": "https://github.com/Galexia-Agency/stylelint-config.git#commit=861ee9c7f547f05547658dd78de8519e80c9a23f"
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
+    "stylelint-config-galexia": "https://github.com/Galexia-Agency/stylelint-config.git"
   },
   "browserslist": [
     "last 5 versions and not ie <= 11 and > 0.2% and not dead and not op_mini all"
-  ],
-  "engines": {
-    "node": "^18.12.0",
-    "yarn": "^1.10"
-  },
-  "packageManager": "yarn@3.6.3"
+  ]
 }
