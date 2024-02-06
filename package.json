@@ -12,8 +12,10 @@
   },
   "dependencies": {
     "@ckpack/vue-color": "^1.5.0",
-    "font-picker-vue": "^1.0.3",
+    "font-picker-vue": "https://github.com/joebailey26/font-picker-vue",
     "jenesius-vue-modal": "^1.10.3",
+    "sass": "^1.70.0",
+    "sass-loader": "^14.1.0",
     "vue": "^3.4.15"
   },
   "devDependencies": {

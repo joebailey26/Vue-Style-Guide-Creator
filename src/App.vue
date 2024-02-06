@@ -121,11 +121,11 @@ div[id^='font-picker'], .vc-chrome {
       <div class="container column">
         <label>
           Heading Font
-          <!-- <FontPicker :api-key="apiKey" :options="options1" :active-font="fontHeading.family" @change="headingFont" /> -->
+          <FontPicker :api-key="apiKey" :options="options1" :active-font="fontHeading.family" @change="headingFont" />
         </label>
         <label>
           Body Font
-          <!-- <FontPicker :api-key="apiKey" :options="options2" :active-font="fontBody.family" @change="bodyFont" /> -->
+          <FontPicker :api-key="apiKey" :options="options2" :active-font="fontBody.family" @change="bodyFont" />
         </label>
         <label>
           Font Size
@@ -161,7 +161,7 @@ div[id^='font-picker'], .vc-chrome {
 </template>
 
 <script>
-// import FontPicker from 'font-picker-vue'
+import FontPicker from 'font-picker-vue'
 import { container, openModal } from 'jenesius-vue-modal'
 import Color from './components/color'
 import NuxtModal from './components/nuxtModal'
@@ -170,7 +170,7 @@ import WpModal from './components/wpModal'
 export default {
   components: {
     Color,
-    // FontPicker,
+    FontPicker,
     ModalContainer: container
   },
   setup () {
