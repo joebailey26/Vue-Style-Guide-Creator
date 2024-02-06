@@ -3,9 +3,8 @@
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
   CI = "1"
-  NODE_OPTIONS = "--openssl-legacy-provider"
 
 [[redirects]]
   from = "https://vue-style-guide-creator.netlify.app/*"
