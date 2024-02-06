@@ -2,10 +2,6 @@
   command = "pnpm run build"
   publish = "dist"
 
-[build.environment]
-  NODE_VERSION = "20"
-  CI = "1"
-
 [[redirects]]
   from = "https://vue-style-guide-creator.netlify.app/*"
   to = "https://style-guide-creator.joebailey.xyz/:splat"
